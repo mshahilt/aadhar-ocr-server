@@ -32,7 +32,6 @@ export class UserController {
       const frontData = extractAadhaarInfo(frontText);
       const backData = extractBackAadhaarInfo(backText);
 
-      // Combine the extracted data, prioritizing front for name, DOB, etc.
       const finalData = {
         name: frontData.name,
         dob: frontData.dob,
@@ -40,7 +39,7 @@ export class UserController {
         aadharNumber: frontData.aadharNumber,
         address: backData.address,
         phone: backData.phone,
-        photo: undefined,  // You can add logic for photo extraction if needed.
+        photo: undefined, 
         success: true,
         message: "Aadhaar data extracted successfully."
       };
@@ -54,7 +53,6 @@ export class UserController {
       if (worker) {
         await worker.terminate();
       }
-      // Clean up uploaded files
       if (req.files) {
         const frontFiles = (req.files as { [fieldname: string]: Express.Multer.File[] })['front'];
         const backFiles = (req.files as { [fieldname: string]: Express.Multer.File[] })['back'];
